@@ -1,0 +1,13 @@
+第1张图片的处理:
+(1)字符识别结果:
+	PROD:DOROPhoneEasy516
+	DESCR:EASYMOBILEPHONE
+	COLOUR:BLACK
+(2)条形码识别结果:
+	code128译码结果为：357827050003469
+	code128译码结果为：CKC00107Y00001
+	EAN13码译码结果为：7322460064266
+   经校验，EAN-13解码正确!
+
+
+
