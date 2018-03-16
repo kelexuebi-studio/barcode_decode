@@ -1,13 +1,13 @@
 function bar128(bw,num2)
 load code128;
 bar_128=bw;
-% figure,imshow(bar_128),title('Í¼Ïñ');
+% figure,imshow(bar_128),title('å›¾åƒ');
 [m,n]=size(bar_128);
 
-% num= 0;      %¼ì²â59¸ùÌõĞÎÂë
+% num= 0;      %æ£€æµ‹59æ ¹æ¡å½¢ç 
 i=50;
 k=0;
-% number=zeros(12,4);%¼ÇÂ¼Ã¿¸ö·ûºÅ¶ÔÓ¦µÄºÚ°×ÌõÂëµÄ¿í¶È£¬11±íÊ¾×Ü¹²ÓĞ11¸ö×Ö·û£¬48±íÊ¾ÓĞ48¸öºÚ°×ÌõÎÆ
+% number=zeros(12,4);%è®°å½•æ¯ä¸ªç¬¦å·å¯¹åº”çš„é»‘ç™½æ¡ç çš„å®½åº¦ï¼Œ11è¡¨ç¤ºæ€»å…±æœ‰11ä¸ªå­—ç¬¦ï¼Œ48è¡¨ç¤ºæœ‰48ä¸ªé»‘ç™½æ¡çº¹
 % code_y=zeros(1,60);
 for j=1:n-1
     if bar_128(i,j)~=bar_128(i,j+1)
@@ -32,75 +32,75 @@ mubank(3)=(num(2)+num(3))/2;
 mubank(2)=(num(1)+num(7))/2;
 
 
-%n±íÊ¾µÄÊÇ¹²ÓĞ¶àÉÙ¸ö×ÖÄ¸
+%nè¡¨ç¤ºçš„æ˜¯å…±æœ‰å¤šå°‘ä¸ªå­—æ¯
 
 n=(b-8)/6;
 if n==11||n==15
-number=zeros(n,6);%¼ÇÂ¼ºÚ°×ÌõÎÆµÄÊµ¼Ê¿í¶È
-error=[0,0,0];%¼ÇÂ¼ºÚ°×ÌõÎÆµÄÊµ¼Ê¿í¶ÈÓëÄ£°å¿í¶ÈµÄ²îÖµ
-series=zeros(n,6);%ÓÃ1 2 3 ±íÊ¾µÄºÚ°×ÌõÎÆ
-yima='';
-disp(yima);
-nbar=1;%nbar±íÊ¾µÄÊÇµÚ¼¸¸ö×Ö·û
-for k=1:(b-14)
-    if mod(k-1,6)==0&&k~=1
-        nbar=nbar+1;
-    end
-    q=k-(nbar-1)*6;
-    number(nbar,q)=code_y(k+1)-code_y(k);
-    if number(nbar,q)>=mubank(3)+3%Õâ¸ö2¿ÉÄÜ»¹»áÔì³ÉÎó²î£¬µÃÍ¨¹ıµ÷ÊÔÈ¥È·¶¨×îÓÅÖµ
-        series(nbar,q)=4;
-    else
-        error=number(nbar,q)-mubank; 
-        find(min(abs(error)')==abs(error));
-        series(nbar,q)=find(min(abs(error)')==abs(error));%; %matlabÖĞÓĞÇó¾ØÕó×îĞ¡ÖµÒÔ¼°¾ø¶ÔÖµµÄº¯Êı
-    end
-    %ËµÃ÷ÒÑ¾­¶ÁÍêÒ»¸ö×Ö·û
-    if mod(k,6)==0
-        str1=strcat(num2str(series(nbar,1)),num2str(series(nbar,2)));
-        for i=3:6
-            str1=strcat(str1,num2str(series(nbar,i)));
+    number=zeros(n,6);%è®°å½•é»‘ç™½æ¡çº¹çš„å®é™…å®½åº¦
+    error=[0,0,0];%è®°å½•é»‘ç™½æ¡çº¹çš„å®é™…å®½åº¦ä¸æ¨¡æ¿å®½åº¦çš„å·®å€¼
+    series=zeros(n,6);%ç”¨1 2 3 è¡¨ç¤ºçš„é»‘ç™½æ¡çº¹
+    yima='';
+    disp(yima);
+    nbar=1;%nbarè¡¨ç¤ºçš„æ˜¯ç¬¬å‡ ä¸ªå­—ç¬¦
+    for k=1:(b-14)
+        if mod(k-1,6)==0&&k~=1
+            nbar=nbar+1;
         end
-%         str1
-        if k==6
-            for i=104:106
-                if strcmp(str1,code128{i,1})
-                    flagj=i-102;
-                    break;
-                end
-            end
+        q=k-(nbar-1)*6;
+        number(nbar,q)=code_y(k+1)-code_y(k);
+        if number(nbar,q)>=mubank(3)+3%è¿™ä¸ª2å¯èƒ½è¿˜ä¼šé€ æˆè¯¯å·®ï¼Œå¾—é€šè¿‡è°ƒè¯•å»ç¡®å®šæœ€ä¼˜å€¼
+            series(nbar,q)=4;
         else
-            
-            for i=1:103
-                if strcmp(str1,code128{i,1})
-%                    yima(1,nbar)=code128{i,flagj}
-                      if strcmp(code128{i,flagj},'CODEB')
-                          flagj=3;
-                      end
-                      if strcmp(code128{i,flagj},'CODEA')
-                              flagj=2;
-                      end
-                      if strcmp(code128{i,flagj},'+')
+            error=number(nbar,q)-mubank;
+            find(min(abs(error)')==abs(error));
+            series(nbar,q)=find(min(abs(error)')==abs(error));%; %matlabä¸­æœ‰æ±‚çŸ©é˜µæœ€å°å€¼ä»¥åŠç»å¯¹å€¼çš„å‡½æ•°
+        end
+        %è¯´æ˜å·²ç»è¯»å®Œä¸€ä¸ªå­—ç¬¦
+        if mod(k,6)==0
+            str1=strcat(num2str(series(nbar,1)),num2str(series(nbar,2)));
+            for i=3:6
+                str1=strcat(str1,num2str(series(nbar,i)));
+            end
+            %         str1
+            if k==6
+                for i=104:106
+                    if strcmp(str1,code128{i,1})
+                        flagj=i-102;
                         break;
-                      end
-                       if strcmp(code128{i,flagj},'FNC4')
-                       break;
-                      end           
-                      if strcmp(code128{i,flagj},'CODEC')
-                               flagj=4;
-                      
-                      else
-                          yima=strcat(yima,code128{i,flagj});
-                        break;         
-                      end
+                    end
+                end
+            else
+                
+                for i=1:103
+                    if strcmp(str1,code128{i,1})
+                        %                    yima(1,nbar)=code128{i,flagj}
+                        if strcmp(code128{i,flagj},'CODEB')
+                            flagj=3;
+                        end
+                        if strcmp(code128{i,flagj},'CODEA')
+                            flagj=2;
+                        end
+                        if strcmp(code128{i,flagj},'+')
+                            break;
+                        end
+                        if strcmp(code128{i,flagj},'FNC4')
+                            break;
+                        end
+                        if strcmp(code128{i,flagj},'CODEC')
+                            flagj=4;
+                            
+                        else
+                            yima=strcat(yima,code128{i,flagj});
+                            break;
+                        end
+                    end
                 end
             end
         end
-    end  
-end
-% fprintf('code128ÒëÂë½á¹ûÎª£º%s\n',yima);
+    end
+    % fprintf('code128è¯‘ç ç»“æœä¸ºï¼š%s\n',yima);
     filename=strcat(num2str(num2),'.txt');
     fid = fopen(filename, 'a+');
-    fprintf(fid,'\tcode128ÒëÂë½á¹ûÎª£º%s\r\n',yima);
+    fprintf(fid,'\tcode128è¯‘ç ç»“æœä¸ºï¼š%s\r\n',yima);
     fclose(fid);
 end
